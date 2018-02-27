@@ -1,0 +1,45 @@
+group 'kz.tim.samples'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'checkstyle'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+checkstyle {
+
+    project.ext.checkstyleVersion = '8.8'
+
+    configFile = file("${rootDir}/config/checkstyle.xml")
+
+    checkstyleMain {
+        source = 'src'
+        include '**/*.java'
+        exclude '**/WithViolations.java'
+        reports {
+            html.destination file("${rootDir}/reports/checkstyle/main.html")
+            xml.destination file("${rootDir}/reports/checkstyle/main.xml")
+        }
+    }
+
+    configurations {
+        checkstyle
+    }
+
+    dependencies{
+        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
+    }
+}
+
+clean.doFirst {
+    delete "${rootDir}/reports"
+}
