@@ -8,6 +8,11 @@
   <artifactId>checkstyle-maven</artifactId>
   <version>1.0</version>
 
+  <properties>
+    <checkstyle.config.location>config/checkstyle.xml</checkstyle.config.location>
+    <checkstyle.excludes>**/WithViolations.java</checkstyle.excludes>
+  </properties>
+
   <reporting>
     <plugins>
       <!-- To generate HTML report.-->
@@ -16,13 +21,11 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>3.0.0</version>
         <configuration>
-          <configLocation>config/checkstyle.xml</configLocation>
           <sourceDirectories>
             <sourceDirectory>
-              src
+              src/main
             </sourceDirectory>
           </sourceDirectories>
-          <excludes>**/WithViolations.java</excludes>
         </configuration>
         <reportSets>
           <reportSet>
@@ -37,33 +40,6 @@
 
   <build>
     <plugins>
-      <!-- Checkstyle plugin itself-->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <id>validate</id>
-            <phase>validate</phase>
-            <configuration>
-              <configLocation>config/checkstyle.xml</configLocation>
-              <sourceDirectories>
-                <sourceDirectory>
-                  src/main
-                </sourceDirectory>
-              </sourceDirectories>
-              <excludes>**/WithViolations.java</excludes>
-              <encoding>UTF-8</encoding>
-              <consoleOutput>true</consoleOutput>
-              <failsOnError>true</failsOnError>
-            </configuration>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -71,6 +47,11 @@
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.0.0</version>
       </plugin>
     </plugins>
     <pluginManagement>

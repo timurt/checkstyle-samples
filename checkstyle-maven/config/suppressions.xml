@@ -10,5 +10,5 @@
 
     <suppress checks="MethodLengthCheck"
               files="SuppressionSample.java"
-              lines="19"/>
+              lines="20"/>
 </suppressions>

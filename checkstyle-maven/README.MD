@@ -19,7 +19,7 @@ Usage
 
 To run checkstyle and see violations in console, 
 type the following command
-> $ mvn clean verify
+> $ mvn checkstyle:check
 
 To generate report you should run the following command
 > $ mvn site
